@@ -80,6 +80,6 @@ for selected_region in input_region:
         else:
             st.warning(f"No data available for {selected_region}")
 
-# ... (The rest of your code)
+
 
 
