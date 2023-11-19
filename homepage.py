@@ -21,7 +21,7 @@ with col1:
 
 # Import and display raw data
 twitter_data = pd.read_csv('cleaned_data_Twitter.csv')
-loc_data = pd.read_csv('country_loc.csv')
+loc_data = pd.read_csv('country_loc.csv', encoding='ISO-8859-1')
 st.markdown('#### <font color = "#006BB6">Raw Data', unsafe_allow_html=True)
 check_data = st.expander('Click to see raw data')
 with check_data:
@@ -53,25 +53,22 @@ for i in input_region:
         num_user = twitter_data[twitter_data['Region of Focus'] == i]["X (Twitter) Follower #"]
         st.markdown(num_user)
 
-        world_map_chart = pdk.Deck(
-            map_style="mapbox://styles/mapbox/light-v9",
+        st.pydeck_chart(pdk.Deck(
+            map_style=None,
             initial_view_state=pdk.ViewState(
                 latitude=center_lat,
                 longitude=center_lon,
-                zoom=2,
+                zoom=4,
                 pitch=50,
             ),
-        )
-
-        scatter_layer = pdk.Layer(
-            'ScatterplotLayer',
-            data=filtered_data,
-            get_position='[longitude, latitude]',
-            get_radius=10000,  # Adjust the radius as needed
-            get_fill_color=[255, 0, 0],  # Red color for markers
-            pickable=True,
-        )
-
-
-    st.pydeck_chart(world_map_chart)
+            layers=[
+                pdk.Layer(
+                    'ScatterplotLayer',
+                    data=filtered_data,
+                    get_position='[longitude, latititue]',
+                    get_color='[200, 30, 0, 160]',
+                    get_radius=2000,
+                ),
+            ],
+        ))
 
