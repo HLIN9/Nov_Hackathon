@@ -45,30 +45,41 @@ if not filtered_data.empty:
 # Plot the map bar chart displaying number of social media users
 st.markdown('## <font color = "#006BB6">Number Social Media Users Per Region', unsafe_allow_html=True)
 
-for i in input_region:
-    if i == None:
+for selected_region in input_region:
+    if not input_region:
         st.error("Please select at least one region in the sidebar.")
-
     else:
-        num_user = twitter_data[twitter_data['Region of Focus'] == i]["X (Twitter) Follower #"]
-        st.markdown(num_user)
+        # Filter data for the selected region
+        region_data = filtered_data[filtered_data['name'] == selected_region]
 
-        st.pydeck_chart(pdk.Deck(
-            map_style=None,
-            initial_view_state=pdk.ViewState(
-                latitude=center_lat,
-                longitude=center_lon,
-                zoom=4,
-                pitch=50,
-            ),
-            layers=[
-                pdk.Layer(
-                    'ScatterplotLayer',
-                    data=filtered_data,
-                    get_position='[longitude, latititue]',
-                    get_color='[200, 30, 0, 160]',
-                    get_radius=2000,
+        # Check if the region data is not empty
+        if not region_data.empty:
+            # Display the number of social media users
+            num_users = twitter_data[twitter_data['Region of Focus'] == selected_region]["X (Twitter) Follower #"]
+            st.markdown(f"Number of Twitter users in {selected_region}: {num_users.iloc[0]}")
+
+            # Display the map for the selected region
+            st.pydeck_chart(pdk.Deck(
+                map_style=None,
+                initial_view_state=pdk.ViewState(
+                    latitude=region_data['latitude'].iloc[0],
+                    longitude=region_data['longitude'].iloc[0],
+                    zoom=4,
+                    pitch=50,
                 ),
-            ],
-        ))
+                layers=[
+                    pdk.Layer(
+                        'ScatterplotLayer',
+                        data=region_data,
+                        get_position='[longitude, latitude]',
+                        get_color='[200, 30, 0, 160]',
+                        get_radius=200,
+                    ),
+                ],
+            ))
+        else:
+            st.warning(f"No data available for {selected_region}")
+
+# ... (The rest of your code)
+
 
