@@ -46,7 +46,7 @@ with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
     zip_file.writestr('Threads_data.csv', thrd_data.to_csv(index=False))
 
 # Download Zip Button for all data
-st.download_button(label='Download All Data', data=zip_buffer.getvalue(), file_name='All_data.zip', mime='application/zip')
+st.download_button(label='Download All Data as CSV Files', data=zip_buffer.getvalue(), file_name='All_data.zip', mime='application/zip')
 
 #Sidebar
 # Set region user input
@@ -176,7 +176,7 @@ elif input_media == ['Twitter']:
 
     # Visualization 2: Bar Chart for Facebook
     st.subheader("Bar Chart - Total Followers Count for Twitter")
-    fig_tw_bar = px.bar(twitter_data, x="Name (English)", y="Twitter Follower #", title="Total Followers Count for Twitter")
+    fig_tw_bar = px.bar(twitter_data, x="Name (English)", y="X (Twitter) Follower #", title="Total Followers Count for Twitter")
     st.plotly_chart(fig_tw_bar)
 
     # Visualization 3: Donut Chart for Facebook
@@ -186,24 +186,24 @@ elif input_media == ['Twitter']:
 
     # Visualization 4: Radar Chart - Multidimensional Comparison for Facebook
     st.subheader("Radar Chart - Multidimensional Comparison for Twitter")
-    fig_tw_radar = px.line_polar(twitter_data, r="Twitter Follower #", theta="Region of Focus", line_close=True, title="Twitter Count Multidimensional Comparison Twitter")
+    fig_tw_radar = px.line_polar(twitter_data, r="X (Twitter) Follower #", theta="Region of Focus", line_close=True, title="Twitter Count Multidimensional Comparison Twitter")
     st.plotly_chart(fig_tw_radar)
 
     # Visualization 5: Sunburst Chart - Proportional Representation for Facebook
     st.subheader("Sunburst Chart - Proportional Representation for Twitter")
-    fig_tw_sunburst = px.sunburst(twitter_data, path=["Region of Focus"], values="Twitter Follower #", title="Proportional Representation of Follower Counts for Twitter")
+    fig_tw_sunburst = px.sunburst(twitter_data, path=["Region of Focus"], values="X (Twitter) Follower #", title="Proportional Representation of Follower Counts for Twitter")
     st.plotly_chart(fig_tw_sunburst)
     
     # Visualization 7: Treemap - Proportional Representation of Total Followers for Facebook
     st.subheader("Treemap - Proportional Representation of Total Followers for Twitter")
-    fig_tw_treemap_total_followers = px.treemap(twitter_data, path=["Region of Focus", "Name (English)"], values="Twitter Follower #",
+    fig_tw_treemap_total_followers = px.treemap(twitter_data, path=["Region of Focus", "Name (English)"], values="X (Twitter) Follower #",
                                                 title="Proportional Representation of Total Followers by Region for Twitter")
     st.plotly_chart(fig_tw_treemap_total_followers)
 
     # Visualization 9: 3D Scatter Plot - Global Distribution of Followers
     st.subheader("3D Scatter Plot - Global Distribution of Followers")
-    fig_3d_scattertw_global_distribution = px.scatter_3d(twitter_data, x="Region of Focus", y="Name (English)", z="Twitter Follower #",
-                                                    color="Twitter Follower #", title="Global Distribution of Followers")
+    fig_3d_scattertw_global_distribution = px.scatter_3d(twitter_data, x="Region of Focus", y="Name (English)", z="X (Twitter) Follower #",
+                                                    color="X (Twitter) Follower #", title="Global Distribution of Followers")
     st.plotly_chart(fig_3d_scattertw_global_distribution)
 
 
