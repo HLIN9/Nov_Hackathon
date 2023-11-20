@@ -1,5 +1,8 @@
 # Visual Explorer
 
+## Contributors
+Gia Khang Ngo (Laru27), Han Lin (hanslin2014), Pawan Nihure (pawan-nihure), Hemit Dedhia (hemit-dedhia)
+
 ## Introduction
 The Visual Explorer is a Streamlit web application that analyzes social media user statistics from different regions. The project is contributed by Gia Khang Ngo.
 
