@@ -46,8 +46,8 @@ if not filtered_data.empty:
 st.markdown('## <font color = "#006BB6">Number Social Media Users Per Region', unsafe_allow_html=True)
 
 for selected_region in input_region:
-    if not input_region:
-        st.error("Please select at least one region in the sidebar.")
+    if selected_region == None:
+        st.error("Please select at least one region in the sidebar.") # D
     else:
         # Filter data for the selected region
         region_data = filtered_data[filtered_data['name'] == selected_region]
@@ -64,16 +64,20 @@ for selected_region in input_region:
                 initial_view_state=pdk.ViewState(
                     latitude=region_data['latitude'].iloc[0],
                     longitude=region_data['longitude'].iloc[0],
-                    zoom=4,
+                    zoom=6,
                     pitch=50,
                 ),
                 layers=[
                     pdk.Layer(
-                        'ScatterplotLayer',
+                        'HexagonLayer',
                         data=region_data,
                         get_position='[longitude, latitude]',
-                        get_color='[200, 30, 0, 160]',
-                        get_radius=200,
+                        radius= 20000,
+                        color = '[0, 0, 0, 255]',
+                        elevation_scale= (num_users.iloc[0])*100,
+                        elevation_range = [0,100000],
+                        pickable=True,
+                        extruded = True,       
                     ),
                 ],
             ))
