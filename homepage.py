@@ -33,8 +33,13 @@ st.download_button(label= 'Download Raw Data', data=twitter_data.to_csv().encode
 #Sidebar
 # Set region user input
 st.sidebar.markdown('**<font color="#ffc72c">User Input Features</font>**',unsafe_allow_html=True)
-st.sidebar.markdown("*Select the social media platform you want to analyze:*")
+st.sidebar.markdown("*Select the region you want to analyze:*")
 input_region = st.sidebar.multiselect('Region', twitter_data['Region of Focus'].unique())
+st.sidebar.markdown("*Select the social media platform you want to analyze:*")
+input_media = st.sidebar.multiselect('Social Media', ["Facebook", "Instagram", "Threads", "Tiktok", "Twitter", "Youtube"])
+
+st.sidebar.markdown("*Select the social media platform you want to analyze:*")
+
 filtered_data = loc_data[loc_data['name'].isin(input_region)]
 
 if not filtered_data.empty:
