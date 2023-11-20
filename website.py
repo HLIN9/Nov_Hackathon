@@ -15,8 +15,7 @@ with col2:
     st.image('https://www.ncsc.gov.uk/images/social-icons.jpg', width= 300)
 
 with col1:
-    st.markdown('''* A visual graphic of social media user statistics from different region.
-    * **Data source:** Do we need this.''')
+    st.markdown('''* A visual graphic of social media user statistics from different region.''')
 
     st.image('https://miro.medium.com/v2/resize:fit:1024/0*rnYWcmRH4KbfCWzt.png', width= 350)
 
